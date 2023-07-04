@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Stih List</h1>
+
+    {% if stih_list %}
+    <h4>Classics</h4>
+    <ul>
+      {% for stih in stih_list %}
+      {% if stih.author.classic %}
+      <li>
+        <a href="{{ stih.get_absolute_url }}">{{ stih.title }}</a> ({{stih.author}})
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    <h4>Users</h4>
+    <ul>
+      {% for stih in stih_list %}
+      {% if not stih.author.classic %}
+      <li>
+        <a href="{{ stih.get_absolute_url }}">{{ stih.title }}</a> ({{stih.author}})
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>There are no stihs in the library.</p>
+    {% endif %} 
+{% endblock %}

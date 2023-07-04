@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Your stihs</h1>
+
+    {% if stih_list %}
+    <ul>
+      {% for stih in stih_list %}
+      <li class="{% if stih.checked is False %}text-danger{% endif %}">
+        <a href="{% url 'stih-detail' stih.pk %}">{{stih.title}}</a> ({{ stih.pub_date }}) <br><a href="{% url 'stih_update' stih.pk %}">Edit</a>  | <a href="{% url 'stih_delete' stih.pk %}">Delete</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no stihs.</p>
+    {% endif %}
+    {% if perms.catalog.cant_validate %}
+    <a href="{% url 'stih_user_create' %}">Add new stih</a><br>
+    {% endif %}
+    {% if perms.catalog.can_validate %}
+    <a href="{% url 'stih_create' %}">Add custom stih</a>
+    {% endif %}
+{% endblock %}

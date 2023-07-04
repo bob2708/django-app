@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+    <h1>Renew: {{stihinst.title}}</h1>
+    <p>Author: {{stihinst.author}}</p>
+    <p{% if not stihinst.checked %} class="text-danger"{% endif %}>date: {{stihinst.pub_date}}</p>
+    {{ stihinst.content|linebreaks }}
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+
+{% endblock %}
